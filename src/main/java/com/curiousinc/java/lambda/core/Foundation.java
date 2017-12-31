@@ -14,20 +14,20 @@ public class Foundation {
 	public static void main(String[] args) {
 
 		ExecutionTimeTracker.measure(Arrays.stream(Month.values()).map(Month::toString).collect(Collectors.toList()),
-				(preJava5Months) -> {
+				(months) -> {
 					logger.debug("Pre Java5 : ");
-					for (int i = 0; i < preJava5Months.size(); i++) {
-						if (preJava5Months.get(i).length() > 4) {
-							logger.debug("{} is a long month", preJava5Months.get(i));
+					for (int i = 0; i < months.size(); i++) {
+						if (months.get(i).length() > 4) {
+							logger.debug("{} is a long month", months.get(i));
 						}
 					}
 					return null;
 				});
 
 		ExecutionTimeTracker.measure(Arrays.stream(Month.values()).map(Month::toString).collect(Collectors.toList()),
-				(java5Months) -> {
+				(months) -> {
 					logger.debug("Java5 : ");
-					for (String month : java5Months) {
+					for (String month : months) {
 						if (month.length() > 4) {
 							logger.debug("{} is a long month", month);
 						}
@@ -36,16 +36,16 @@ public class Foundation {
 				});
 
 		ExecutionTimeTracker.measure(Arrays.stream(Month.values()).map(Month::toString).collect(Collectors.toList()),
-				(java8Months) -> {
+				(months) -> {
 					logger.debug("Java8 : ");
-					java8Months.stream().filter((string) -> string.length() > 4).forEach(logger::debug);
+					months.stream().filter((string) -> string.length() > 4).forEach(logger::debug);
 					return null;
 				});
 
 		ExecutionTimeTracker.measure(Arrays.stream(Month.values()).map(Month::toString).collect(Collectors.toList()),
-				(java8Months) -> {
+				(months) -> {
 					logger.debug("Java8 Parallel: ");
-					java8Months.parallelStream().filter((string) -> string.length() > 4).forEach(logger::debug);
+					months.parallelStream().filter((string) -> string.length() > 4).forEach(logger::debug);
 					return null;
 				});
 	}
